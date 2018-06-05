@@ -1,0 +1,28 @@
+.main_cont {
+   margin-top: 20px;
+   height: 400px;
+   background: #0143A3;
+   box-shadow: 0px 0px 10px white;
+   border-radius: 4px;
+}
+
+.head {
+   margin: 25px;
+   text-align: center;
+   color: white;
+   text-shadow: 0px 0px 3px #5DA5E3;
+}
+
+.list_wrap {
+   background: white;
+   height: 100px;
+}
+
+.text_bld {
+   color: silver;
+}
+
+.white {
+   border: 1px solid silver;
+   color: white;
+}
