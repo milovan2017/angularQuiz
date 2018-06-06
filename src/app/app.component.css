@@ -1,6 +1,6 @@
 .main_cont {
    margin-top: 20px;
-   height: 400px;
+   height: 500px;
    background: #0143A3;
    box-shadow: 0px 0px 10px white;
    border-radius: 4px;
@@ -19,10 +19,37 @@
 }
 
 .text_bld {
-   color: silver;
+   color: orange;
+   padding-bottom: 10px;
 }
 
 .white {
    border: 1px solid silver;
    color: white;
+}
+
+.badge {
+   cursor: pointer;
+   transition: all .2s;
+}
+
+.badge:hover {
+   background: red;
+   transform: rotate(360deg);
+   border-radius: 50%;
+}
+
+.allCitiesItem {
+   height: 12px;
+   border-radius: 0px;
+   cursor: pointer;
+   transition: all .5;
+}
+.allCitiesItem:hover {
+   background: orange;
+}
+
+.allCitiesList {
+   height: 300px;
+   overflow-x: hidden;
 }

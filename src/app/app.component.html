@@ -11,28 +11,31 @@
                <div class="col-sm-5 offset-1">
                   <div class="row">
                      <div class="col-sm-6">
-                        <div class="float-left text_bld">OBLAST:</div>
+                        <div class="float-left text_bld">OBLAST: {{oblast}}</div>
                      </div>
                      <div class="col-sm-6">
-                        <div class="float-right text_bld">Vreme: 00:00</div>
+                        <div class="float-right text_bld">Vreme: {{vreme}}s</div>
                      </div>
                   </div>
                   <div class="row">
                      <div class="input-group col-sm-12">
                         <div class="input-group-prepend">
-                           <button class="btn btn-outline-secondary dropdown-toggle white" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</button>
-                           <div class="dropdown-menu">
-                              <a class="dropdown-item" href="#">Action</a>
-                           </div>
+                           <button class="btn btn-outline-secondary dropdown-toggle white" type="button" (click)="dropDownClick()">Dropdown</button>
                         </div>
-                        <input type="text" class="form-control" aria-label="Text input with dropdown button">
+                        <input  [(ngModel)]="search" type="text" class="form-control" (keyup)="citySearch()">
+                        </div>
+                        <div class="col-sm-12" [style.display]="dropDownClicked ? 'block' : 'none'">
+                           <ul class="list-group allCitiesList">
+                              <li *ngFor="let item of ponudjene; let i = index" class="list-group-item d-flex justify-content-between align-items-center allCitiesItem">{{i}} {{item}}
+                              </li>
+                           </ul>
                         </div>
                      </div>
                   </div>
                   <div class="col-sm-5">
                      <div class="row">
                         <div class="col-sm-12">
-                           <span class="text_bld">Lista ubacenih gradova</span>
+                           <div class="text_bld">Lista ubacenih gradova</div>
                         </div>
                      </div>
                      <div class="row">
