@@ -1,0 +1,35 @@
+<div class="container-fluid">
+   <div class="row">
+      <div class="col-sm-6 offset-3">
+         <div class="main_cont">
+            <div class="row">
+               <div class="col-sm-12">
+                  <h1 class="head">RESULTS</h1>
+               </div>
+            </div>
+            <br>
+            <br>
+            <div class="row">
+               <div class="col-sm-8 offset-2">
+                  <div class="row">
+                     <div class="col-sm-6 ans">
+                        <h2>Right: {{right}}</h2>
+                     </div>
+                     <div class="col-sm-6 ans">
+                        <h2>Wrong: {{wrong}}</h2>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <br>
+            <div class="row">
+               <div class="col-sm-8 offset-2">
+                  <div class="progress">
+                     <div class="progress-bar" role="progressbar" [style.width]="percentShow">{{percentShow}}</div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
