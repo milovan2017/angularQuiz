@@ -18,14 +18,12 @@ percentShow : string = "";
 
  }
  ngOnChanges(changes: SimpleChanges) {
-   //const name: SimpleChange = changes.name;
    if (this.ended) {
    let self = this;
    this.sum = this.right + this.wrong;
       if (this.right > 0) {
          this.endPercent = +((this.right/this.sum)*100).toFixed(2);
           let loop = setInterval(function(){
-            //self.percentShow = self.percent + "%";
             if (self.tickPercent < self.endPercent) {
                 self.tickPercent +=0.1;
                 self.percentShow = self.tickPercent.toFixed(2) + "%";
