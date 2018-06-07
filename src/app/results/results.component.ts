@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges, SimpleChange } from '@angular/core';
+import { DataService } from '../data.service';
 
 @Component({
  selector: 'app-results',
@@ -6,19 +7,22 @@ import { Component, OnInit, Input, OnChanges, SimpleChanges, SimpleChange } from
  styleUrls: ['./results.component.css']
 })
 export class ResultsComponent implements OnChanges, OnInit {
-@Input() right: number;
-@Input() wrong: number;
-@Input() ended: number;
-sum:number=0
-endPercent : number = 0;
-tickPercent : number = 0;
-percentShow : string = "";
- constructor() { }
- calcPercent(){
+right: number;
+wrong: number;
+ended: boolean;
+sum: number = 0;
+endPercent: number = 0;
+tickPercent: number = 0;
+percentShow: string = "";
 
- }
+ constructor(private DataService: DataService) { }
+
  ngOnChanges(changes: SimpleChanges) {
-   if (this.ended) {
+    console.log(this.DataService)
+   if (this.DataService.ended) {
+      this.right = this.DataService.right;
+      this.wrong = this.DataService.wrong;
+      this.ended = this.DataService.ended;
    let self = this;
    this.sum = this.right + this.wrong;
       if (this.right > 0) {
@@ -38,7 +42,7 @@ percentShow : string = "";
 
  }
  ngOnInit() {
-
+console.log(this.DataService)
  }
 
 }

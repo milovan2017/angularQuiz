@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { DataService } from './data.service';
 
 @Component({
  selector: 'app-root',
@@ -16,19 +17,17 @@ export class AppComponent {
    search: string = '';
    searchedArr: string[] = [];
    clickedArr: string[] = [];
-   right: number = 0;
-   wrong: number = 0;
-   ended: boolean = false;
 
    checkAnswers(){
       for (let i = 0; i < this.clickedArr.length; i++) {
          if (this.tacno.includes(this.clickedArr[i])) {
-            this.right+=1;
+            this.DataService.right+=1;
          } else{
-            this.wrong+=1;
+            this.DataService.wrong+=1;
          }
       }
-      this.ended = true;
+      this.DataService.ended = true;
+      console.log(this.DataService)
    }
 
    startTime(){
@@ -74,7 +73,7 @@ export class AppComponent {
       this.clickedArr.splice(i,1);
    }
    addCity(){
-      if (this.searchedArr.length > 0) {
+      if (this.searchedArr.length > 0 && this.search != " ") {
          let a = this.searchedArr[0];
          this.clickedArr.push(this.searchedArr[0]);
          this.searchedArr = this.searchedArr.filter(city => city != a);
@@ -84,8 +83,8 @@ export class AppComponent {
    }
    clickCity(item,i){
       document.getElementById('src').focus();
-      this.searchedArr = this.ponudjene.filter(city => city != item)
-      this.ponudjene.splice(i,1);
+      this.searchedArr = this.searchedArr.filter(city => city != item);
+      this.ponudjene = this.ponudjene.filter(city => city != item);
       this.search = "";
       if (this.clickedArr.length > 0) {
          if (!this.clickedArr.includes(item)) {
@@ -95,7 +94,8 @@ export class AppComponent {
          this.clickedArr.push(item)
       }
    }
- constructor(private http: HttpClient) {}
+
+ constructor(private http: HttpClient, private DataService: DataService) {}
  ngOnInit(): void {
    this.http.get('../assets/podaci.json').subscribe((data: any) => {
       this.oblast = data.oblast;
