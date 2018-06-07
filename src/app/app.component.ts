@@ -13,13 +13,13 @@ export class AppComponent {
    vreme: number = 0;
    vremeSec:string = "";
    choosen: string[] = [];
-   dropDownClicked: boolean = false;
    search: string = '';
    searchedArr: string[] = [];
    clickedArr: string[] = [];
    right: number = 0;
    wrong: number = 0;
    ended: boolean = false;
+
    checkAnswers(){
       for (let i = 0; i < this.clickedArr.length; i++) {
          if (this.tacno.includes(this.clickedArr[i])) {
@@ -29,13 +29,13 @@ export class AppComponent {
          }
       }
       this.ended = true;
-      console.log(this.right, this.wrong)
    }
 
    startTime(){
       var self = this;
       var timeSec = self.vreme;
-      var loop = setInterval(timeF, 100);
+      var loop = setInterval(timeF, 1000);
+      document.getElementById('src').focus();
       function timeF() {
          if (timeSec > 0) {
             var min = Math.floor(timeSec / 60),
@@ -50,39 +50,57 @@ export class AppComponent {
       }
    }
 
-   dropDownClick() {
-      this.dropDownClicked =!this.dropDownClicked;
-   }
-   citySearch (){
-      this.searchedArr = filterItems(this.search, this.ponudjene).splice('');
-   function filterItems(query,arr) {
+   filterItems(query, arr){
       return arr.filter(function(el) {
          return el.toLowerCase().indexOf(query.toLowerCase()) > -1;
    })
-}
    }
-   deleteCity(i) {
+   citySearch ($event){
+      if (this.search.length >0) {
+            if ($event.keyCode == 13) {
+               this.addCity();
+            } else {
+               this.searchedArr = this.filterItems(this.search, this.ponudjene);
+            }
+      }  else {
+         this.searchedArr = [];
+      }
+   }
+   deleteCity(item, i) {
+      this.searchedArr.push(item);
+      this.ponudjene.push(item);
+      this.searchedArr.sort();
+      this.ponudjene.sort();
       this.clickedArr.splice(i,1);
    }
-   clickCity(el){
-      if (this.clickedArr.length < 4) {
-         if (this.clickedArr.length > 0) {
-           if (!this.clickedArr.includes(el.target.innerHTML)) {
-               this.clickedArr.push(el.target.innerHTML)
-           }
-         } else {
-           this.clickedArr.push(el.target.innerHTML)
+   addCity(){
+      if (this.searchedArr.length > 0) {
+         let a = this.searchedArr[0];
+         this.clickedArr.push(this.searchedArr[0]);
+         this.searchedArr = this.searchedArr.filter(city => city != a);
+         this.ponudjene = this.ponudjene.filter(city => city != a);
+         document.getElementById('src').focus();
+      }
+   }
+   clickCity(item,i){
+      document.getElementById('src').focus();
+      this.searchedArr = this.ponudjene.filter(city => city != item)
+      this.ponudjene.splice(i,1);
+      this.search = "";
+      if (this.clickedArr.length > 0) {
+         if (!this.clickedArr.includes(item)) {
+            this.clickedArr.push(item)
          }
       } else {
-         console.log('end')
+         this.clickedArr.push(item)
       }
    }
  constructor(private http: HttpClient) {}
  ngOnInit(): void {
    this.http.get('../assets/podaci.json').subscribe((data: any) => {
       this.oblast = data.oblast;
-      this.ponudjene = data.ponudjene.splice('');
-      this.tacno = data.tacno.splice('');
+      this.ponudjene = data.ponudjene.slice();
+      this.tacno = data.tacno.slice();
       this.vreme = data.vreme;
       this.startTime();
    });

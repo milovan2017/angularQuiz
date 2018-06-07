@@ -17,3 +17,12 @@
    text-align: center;
    color: silver;
 }
+
+.progress-bar.active, .progress.active .progress-bar {
+    -webkit-animation: none;
+    animation: none;
+}
+.progress-bar {
+    -webkit-transition : none;
+    transition : none;
+}
