@@ -58,9 +58,10 @@ export class AppComponent {
    })
    }
    citySearch ($event){
-      if (this.search.length >0) {
+      if (this.search.length > 0 && this.search != " ") {
             if ($event.keyCode == 13) {
                this.addCity();
+               this.search = "";
             } else {
                this.searchedArr = this.filterItems(this.search, this.ponudjene);
             }
@@ -76,12 +77,13 @@ export class AppComponent {
       this.clickedArr.splice(i,1);
    }
    addCity(){
-      if (this.searchedArr.length > 0 && this.search != " ") {
+      if (this.searchedArr.length > 0 && this.search != "") {
          let a = this.searchedArr[0];
          this.clickedArr.push(this.searchedArr[0]);
          this.searchedArr = this.searchedArr.filter(city => city != a);
          this.ponudjene = this.ponudjene.filter(city => city != a);
          document.getElementById('src').focus();
+         this.search = "";
       }
    }
    clickCity(item,i){
