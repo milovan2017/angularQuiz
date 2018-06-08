@@ -19,6 +19,7 @@ export class AppComponent {
    clickedArr: string[] = [];
    right: number = 0;
    wrong: number = 0;
+   ended:boolean;
 
    checkAnswers(){
       for (let i = 0; i < this.clickedArr.length; i++) {
@@ -99,8 +100,6 @@ export class AppComponent {
          this.clickedArr.push(item)
       }
    }
-
-ended:boolean;
 
  constructor(private http: HttpClient, private DataService: DataService) {}
  ngOnInit(): void {
