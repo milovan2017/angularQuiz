@@ -1,8 +1,26 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 
 @Injectable()
 export class DataService {
-  right: number = 0;
-  wrong: number = 0;
-  ended: boolean = false;
+   private ended = new BehaviorSubject<boolean>(false);
+   private right = new BehaviorSubject<number>(0);
+   private wrong = new BehaviorSubject<number>(0);
+
+   cast = this.ended.asObservable();
+   cast = this.right.asObservable();
+   cast = this.wrong.asObservable();
+
+   editEnded(ended){
+      this.ended = ended;
+   }
+
+   editWrong(wrong){
+      this.wrong = wrong;
+   }
+
+   editRight(right){
+      this.right = right;
+   }
+
 }

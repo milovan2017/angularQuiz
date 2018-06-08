@@ -95,6 +95,8 @@ export class AppComponent {
       }
    }
 
+user:string;
+
  constructor(private http: HttpClient, private DataService: DataService) {}
  ngOnInit(): void {
    this.http.get('../assets/podaci.json').subscribe((data: any) => {
@@ -103,6 +105,7 @@ export class AppComponent {
       this.tacno = data.tacno.slice();
       this.vreme = data.vreme;
       this.startTime();
+      this.DataService.cast.subscribe(user=>this.user = user);
    });
  }
 }

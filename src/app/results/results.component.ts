@@ -42,7 +42,7 @@ percentShow: string = "";
 
  }
  ngOnInit() {
-console.log(this.DataService)
+
  }
 
 }
