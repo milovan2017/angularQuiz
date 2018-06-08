@@ -7,17 +7,17 @@ import { DataService } from './data.service';
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    ResultsComponent
-  ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    FormsModule
-  ],
-  providers: [DataService],
-  bootstrap: [AppComponent]
+ declarations: [
+   AppComponent,
+   ResultsComponent
+ ],
+ imports: [
+   BrowserModule,
+   HttpClientModule,
+   FormsModule
+ ],
+ providers: [DataService],
+ bootstrap: [AppComponent]
 })
 export class AppModule {
 

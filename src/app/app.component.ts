@@ -17,17 +17,20 @@ export class AppComponent {
    search: string = '';
    searchedArr: string[] = [];
    clickedArr: string[] = [];
+   right: number = 0;
+   wrong: number = 0;
 
    checkAnswers(){
       for (let i = 0; i < this.clickedArr.length; i++) {
          if (this.tacno.includes(this.clickedArr[i])) {
-            this.DataService.right+=1;
+            this.right +=1 ;
+            this.DataService.editRight(this.right);
          } else{
-            this.DataService.wrong+=1;
+            this.wrong +=1 ;
+            this.DataService.editWrong(this.wrong);
          }
       }
-      this.DataService.ended = true;
-      console.log(this.DataService)
+      this.DataService.editEnded(true);
    }
 
    startTime(){
@@ -95,7 +98,7 @@ export class AppComponent {
       }
    }
 
-user:string;
+ended:boolean;
 
  constructor(private http: HttpClient, private DataService: DataService) {}
  ngOnInit(): void {
@@ -105,7 +108,7 @@ user:string;
       this.tacno = data.tacno.slice();
       this.vreme = data.vreme;
       this.startTime();
-      this.DataService.cast.subscribe(user=>this.user = user);
+      this.DataService.cast.subscribe(ended=>this.ended=ended);
    });
  }
 }
